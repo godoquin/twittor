@@ -15,7 +15,7 @@ func SeeProfile(w http.ResponseWriter, r *http.Request) {
 	}
 	profile, err := database.FindProfile(ID)
 	if err != nil {
-		http.Error(w, "Ocurrió un error al intentar buscar el registro"+err.Error(), 400)
+		http.Error(w, "Ocurrió un error al intentar buscar el registro "+err.Error(), 400)
 		return
 	}
 	w.Header().Set("content-type", "application/json")

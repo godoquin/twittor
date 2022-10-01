@@ -16,10 +16,11 @@ func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 	myKey := []byte("MastersDelDesarrollo_grupodeFacebook")
 	claims := &models.Claim{}
 	splitToken := strings.Split(tk, "Bearer")
-	if len(splitToken) != 2 {
-		return claims, false, "", errors.New("formato de token invalido")
+	if len(splitToken) == 2 {
+		tk = strings.TrimSpace(splitToken[1])
+		//return claims, false, "", errors.New("formato de token invalido")
 	}
-	tk = strings.TrimSpace(splitToken[1])
+	//tk = strings.TrimSpace(splitToken[1])
 	tkn, err := jwti.ParseWithClaims(tk, claims, func(token *jwti.Token) (interface{}, error) {
 		return myKey, nil
 	})
