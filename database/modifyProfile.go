@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func ModifyProfile(u models.User, ID string) (bool, error) {
+func ModifyProfileBD(u models.User, ID string) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	db := MongoCN.Database("twittor")

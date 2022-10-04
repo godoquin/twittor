@@ -23,13 +23,13 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Debe especificar una contraseña de al menos 6 caracteres", 400)
 		return
 	}
-	_, find, _ := database.CheckUserExist(t.Email)
+	_, find, _ := database.CheckUserExistBD(t.Email)
 	if find {
 		http.Error(w, "Ya existe un usuario registrado con ese email", 400)
 		return
 	}
 
-	_, status, err := database.InsertRecord(t)
+	_, status, err := database.InsertRecordBD(t)
 	if err != nil {
 		http.Error(w, "Ocurrió un error al intentar realizar el registro del usuario "+err.Error(), 400)
 		return

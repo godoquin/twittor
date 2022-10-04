@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func ReadTweet(ID string, page int64) ([]*models.ReturnTweets, bool) {
+func ReadTweetBD(ID string, page int64) ([]*models.ReturnTweets, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	db := MongoCN.Database("twittor")
@@ -21,9 +21,9 @@ func ReadTweet(ID string, page int64) ([]*models.ReturnTweets, bool) {
 		"userid": ID,
 	}
 	options := options.Find()
-	options.SetLimit(20)
+	options.SetLimit(5)
 	options.SetSort(bson.D{{Key: "date", Value: -1}})
-	options.SetSkip((page - 1) * 20)
+	options.SetSkip((page - 1) * 5)
 
 	cursor, err := col.Find(ctx, condition, options)
 	if err != nil {

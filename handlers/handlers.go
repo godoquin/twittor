@@ -20,6 +20,13 @@ func Handlers() {
 	router.HandleFunc("/modifyprofile", middleware.CheckBD(middleware.CheckJWT(routers.ModifyProfile))).Methods("PUT")
 	router.HandleFunc("/tweet", middleware.CheckBD(middleware.CheckJWT(routers.InsertTweet))).Methods("POST")
 	router.HandleFunc("/readtweets", middleware.CheckBD(middleware.CheckJWT(routers.ReadTweets))).Methods("GET")
+	router.HandleFunc("/deletetweet", middleware.CheckBD(middleware.CheckJWT(routers.DeleteTweet))).Methods("DELETE")
+	router.HandleFunc("/uploadavatar", middleware.CheckBD(middleware.CheckJWT(routers.UploadAvatar))).Methods("POST")
+	router.HandleFunc("/getavatar", middleware.CheckBD(middleware.CheckJWT(routers.GetAvatar))).Methods("GET")
+	router.HandleFunc("/uploadbanner", middleware.CheckBD(middleware.CheckJWT(routers.UploadBanner))).Methods("POST")
+	router.HandleFunc("/getbanner", middleware.CheckBD(middleware.CheckJWT(routers.GetBanner))).Methods("GET")
+	router.HandleFunc("/uprelation", middleware.CheckBD(middleware.CheckJWT(routers.UpRelation))).Methods("POST")
+	router.HandleFunc("/downrelation", middleware.CheckBD(middleware.CheckJWT(routers.DownRelation))).Methods("DELETE")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

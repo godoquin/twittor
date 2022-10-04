@@ -24,7 +24,7 @@ func ReadTweets(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	pag := int64(page)
-	response, ok := database.ReadTweet(ID, pag)
+	response, ok := database.ReadTweetBD(ID, pag)
 	if !ok {
 		http.Error(w, "Error al leer los tweets", http.StatusBadRequest)
 		return

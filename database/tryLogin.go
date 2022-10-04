@@ -6,7 +6,7 @@ import (
 )
 
 func TryLogin(email string, password string) (models.User, bool) {
-	usu, find, _ := CheckUserExist(email)
+	usu, find, _ := CheckUserExistBD(email)
 	if !find {
 		return usu, false
 	}

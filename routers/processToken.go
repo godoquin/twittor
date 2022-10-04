@@ -25,7 +25,7 @@ func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 		return myKey, nil
 	})
 	if err == nil {
-		_, find, _ := database.CheckUserExist(claims.Email)
+		_, find, _ := database.CheckUserExistBD(claims.Email)
 		if find {
 			Email = claims.Email
 			IDUser = claims.ID.Hex()

@@ -22,7 +22,7 @@ func InsertTweet(w http.ResponseWriter, r *http.Request) {
 		Date:    time.Now(),
 	}
 
-	_, status, err := database.InsertTweet(row)
+	_, status, err := database.InsertTweetBD(row)
 	if err != nil {
 		http.Error(w, "Ocurrió un error al intentar insertar el registro, reintente nuevamente "+err.Error(), 400)
 		return

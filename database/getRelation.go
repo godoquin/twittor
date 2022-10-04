@@ -2,23 +2,29 @@ package database
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/godoquin/twittor/models"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func CheckUserExistBD(email string) (models.User, bool, string) {
+func GetRelationBD(t models.Relation) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	db := MongoCN.Database("twittor")
-	col := db.Collection("usuarios")
-	condition := bson.M{"email": email}
-	var result models.User
-	err := col.FindOne(ctx, condition).Decode(&result)
-	ID := result.ID.Hex()
-	if err != nil {
-		return result, false, ID
+	col := db.Collection("relacion")
+
+	condition := bson.M{
+		"userid":         t.UserID,
+		"userrelationid": t.UserRelationID,
 	}
-	return result, true, ID
+	var result models.Relation
+	fmt.Println(result)
+	err := col.FindOne(ctx, condition).Decode(&result)
+	if err != nil {
+		fmt.Println(err.Error())
+		return false, err
+	}
+	return true, nil
 }
