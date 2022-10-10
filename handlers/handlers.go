@@ -27,6 +27,9 @@ func Handlers() {
 	router.HandleFunc("/getbanner", middleware.CheckBD(middleware.CheckJWT(routers.GetBanner))).Methods("GET")
 	router.HandleFunc("/uprelation", middleware.CheckBD(middleware.CheckJWT(routers.UpRelation))).Methods("POST")
 	router.HandleFunc("/downrelation", middleware.CheckBD(middleware.CheckJWT(routers.DownRelation))).Methods("DELETE")
+	router.HandleFunc("/relationquery", middleware.CheckBD(middleware.CheckJWT(routers.RelationQuery))).Methods("GET")
+	router.HandleFunc("/userlist", middleware.CheckBD(middleware.CheckJWT(routers.GetUserList))).Methods("GET")
+	router.HandleFunc("/tweetsfollowers", middleware.CheckBD(middleware.CheckJWT(routers.GetTweetsFollowers))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
